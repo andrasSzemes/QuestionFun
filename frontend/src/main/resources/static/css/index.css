@@ -1,5 +1,5 @@
 body {
-    background-color: darksalmon;
+    background-color: brown !important;
 }
 
 .question, .answer1, .answer2, .answer3, .answer4 {
@@ -7,10 +7,18 @@ body {
     font-size: -webkit-xxx-large;
     left: 50vw;
     transform: translate(-50%, -50%);
+    width: fit-content;
+    text-align: -webkit-center;
 }
 
 .question {
     top: 15vh;
+    color: #ffc107;
+}
+
+.answer1, .answer2, .answer3, .answer4 {
+    font-size: xx-large !important;
+    cursor: pointer;
 }
 
 .answer1 {
