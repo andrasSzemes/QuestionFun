@@ -1,0 +1,30 @@
+body {
+    background-color: darksalmon;
+}
+
+.question, .answer1, .answer2, .answer3, .answer4 {
+    position: fixed;
+    font-size: -webkit-xxx-large;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.question {
+    top: 15vh;
+}
+
+.answer1 {
+    top: 32vh;
+}
+
+.answer2 {
+    top: 44vh;
+}
+
+.answer3 {
+    top: 56vh;
+}
+
+.answer4 {
+    top: 68vh;
+}
