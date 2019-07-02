@@ -1,7 +1,9 @@
 package com.codecool.gameservice.service;
 
 import com.codecool.gameservice.model.GameEntity;
+import com.codecool.gameservice.model.GameResponse;
 import com.codecool.gameservice.model.Question;
+import com.codecool.gameservice.model.SupriseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,6 +20,15 @@ public class GameService {
                 .build();
 
         return gameEntity;
+    }
+
+    public GameResponse getGameResponse(boolean correctness, List<SupriseEntity> suprises) {
+        GameResponse gameResponse = GameResponse.builder()
+                .correctAnswer(correctness)
+                .suprises(suprises)
+                .build();
+
+        return gameResponse;
     }
 
     private List<String> getSuffledAnswers(Question question) {

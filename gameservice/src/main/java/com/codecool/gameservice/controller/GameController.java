@@ -64,11 +64,6 @@ public class GameController {
             //get a punishment
         }
 
-        GameResponse gameResponse = GameResponse.builder()
-                .correctAnswer(correctness)
-                .suprises(suprises)
-                .build();
-
-        return gameResponse;
+        return gameService.getGameResponse(correctness, suprises);
     }
 }
