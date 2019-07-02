@@ -46,3 +46,21 @@ body {
     background-color: transparent !important;
     color: #ffc107 !important;
 }
+
+#choose-cat, #choose-reward {
+    height: 30vh;
+    width: 30vh;
+    border-radius: 5vh;
+    position: fixed;
+    top: 50vh;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#choose-cat {
+    left: 28vw;
+}
+
+#choose-reward {
+    left: 71vw;
+}
