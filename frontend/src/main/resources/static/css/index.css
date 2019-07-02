@@ -36,3 +36,13 @@ body {
 .answer4 {
     top: 68vh;
 }
+
+.clicked {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+.not-clicked:hover {
+    background-color: transparent !important;
+    color: #ffc107 !important;
+}

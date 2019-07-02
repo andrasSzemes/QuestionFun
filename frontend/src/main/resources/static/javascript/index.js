@@ -19,4 +19,28 @@ function loadQuestionWithAnswers() {
     });
 }
 
+/**
+ * Highlight the chosen answer and removes the hover effect from other options.
+ */
+function highlightChosen() {
+    let answerElements = document.querySelectorAll("div[class^=answer]");
+
+    for (let i=0; i<4; i++) {
+        answerElements[i].classList.add("not-clicked");
+        answerElements[i].removeEventListener("click", highlightChosen)
+    }
+    event.target.classList.remove("not-clicked");
+    event.target.classList.add("clicked");
+
+}
+
+function handleAnswerChoosing() {
+    let answerElements = document.querySelectorAll("div[class^=answer]");
+
+    for (let i=0; i<4; i++) {
+        answerElements[i].addEventListener("click", highlightChosen)
+    }
+}
+
 loadQuestionWithAnswers();
+handleAnswerChoosing();
