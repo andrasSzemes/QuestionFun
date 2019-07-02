@@ -76,7 +76,7 @@ function addButtonInteractions() {
             }
         },
         () => { //service does not work
-
+            alert("The game server is down.. I'm really sorry.")
         });
 }
 
