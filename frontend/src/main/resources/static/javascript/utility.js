@@ -13,3 +13,7 @@ export function sendAjax(endpoint, method, params, onSuccess, onFail) {
     }
     req.send(params);
 }
+
+export const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}

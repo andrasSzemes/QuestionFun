@@ -1,4 +1,4 @@
-import {sendAjax} from "/javascript/utility.js";
+import {sendAjax, sleep} from "/javascript/utility.js";
 
 function loadQuestionWithAnswers() {
     let questionElement = document.querySelector(".question");
@@ -27,18 +27,51 @@ function highlightChosen() {
 
     for (let i=0; i<4; i++) {
         answerElements[i].classList.add("not-clicked");
-        answerElements[i].removeEventListener("click", highlightChosen)
     }
     event.target.classList.remove("not-clicked");
     event.target.classList.add("clicked");
 
 }
 
+/**
+ * Responsible for showing the game interface or the reward interface.
+ */
+function showContent(status) {
+    let gameDisplay = "initial";
+    let rewardDisplay = "none";
+    if (status == "reward") {
+        gameDisplay = "none";
+        rewardDisplay = "initial";
+    }
+    sleep(1500).then(() => {
+        let gameElements = document.querySelectorAll('[data-type="game"]');
+        for (let i=0; i<gameElements.length; i++) {
+            gameElements[i].style.display=gameDisplay;
+        }
+
+        let rewardElements = document.querySelectorAll('[data-type="reward"]');
+        for (let i=0; i<rewardElements.length; i++) {
+            rewardElements[i].style.display=rewardDisplay;
+        }
+    })
+}
+
+function addButtonInteractions() {
+    let answerElements = document.querySelectorAll("div[class^=answer]");
+    for (let i=0; i<4; i++) {
+        answerElements[i].removeEventListener("click", addButtonInteractions);
+    }
+
+    highlightChosen();
+    document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
+    showContent(document.body.dataset.status);
+}
+
 function handleAnswerChoosing() {
     let answerElements = document.querySelectorAll("div[class^=answer]");
 
     for (let i=0; i<4; i++) {
-        answerElements[i].addEventListener("click", highlightChosen)
+        answerElements[i].addEventListener("click", addButtonInteractions);
     }
 }
 
