@@ -57,14 +57,8 @@ public class GameController {
         List<SupriseEntity> suprises = new ArrayList<>();
         if (correctness) {
             //get two types of reward
-            SupriseEntity catSuprise = catServiceCaller.getCat();
-
-            SupriseEntity imgSuprise = null;
-            try { imgSuprise = funnyImgServiceCaller.getImg(); }
-            catch (Exception e) { }
-
-            suprises.add(catSuprise);
-            suprises.add(imgSuprise);
+            suprises.add(catServiceCaller.getCat());
+            suprises.add(funnyImgServiceCaller.getImg());
         }
         else {
             //get a punishment
