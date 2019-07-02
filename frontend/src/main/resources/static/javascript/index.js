@@ -4,7 +4,7 @@ function loadQuestionWithAnswers() {
     let questionElement = document.querySelector(".question");
     let answerElements = document.querySelectorAll("div[class^=answer]");
 
-    sendAjax("/game", "GET", "", () => {
+    sendAjax("http://localhost:60050/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
         questionElement.textContent = json.question;
         for (let i=0; i<4; i++) {
@@ -75,8 +75,7 @@ function addButtonInteractions() {
 
     highlightChosen();
     document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
-    refreshContent(document.body.dataset.status);
-    /*sendAjax("/game",
+    sendAjax("http://localhost:60050/game",
         "POST",
         '{"selectedAnswer": "'+event.target.textContent+'"}',
         () => { //service works
@@ -89,7 +88,7 @@ function addButtonInteractions() {
         },
         () => { //service does not work
             alert("The game server is down.. I'm really sorry.")
-        });*/
+        });
 }
 
 function handleAnswerChoosing() {
