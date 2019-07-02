@@ -9,21 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class QuestionPoolConnection {
+public class OpenTriviaApiCaller {
     @Autowired
     private RestTemplate restTemplate;
 
     @Value("${opentrivia.url}")
     private String url;
 
-    public Question getQuestion() {
-        Question question = new Question();
-        OpenTriviaResponse response = restTemplate.getForEntity(url, OpenTriviaResponse.class).getBody();
-        OpenTriviaQuestion openTriviaQuestion = response.getResults().get(0);
-        question.setQuestion(openTriviaQuestion.getQuestion());
-        question.setCorrectAnswer(openTriviaQuestion.getCorrect_answer());
-        question.setIncorrectAnswers(openTriviaQuestion.getIncorrect_answers());
-        return question;
+    public OpenTriviaResponse getQuestion() {
+        return restTemplate.getForEntity(url, OpenTriviaResponse.class).getBody();
     }
 
 }
