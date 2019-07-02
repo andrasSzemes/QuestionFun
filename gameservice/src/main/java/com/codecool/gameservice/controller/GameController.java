@@ -4,10 +4,7 @@ import com.codecool.gameservice.model.GameEntity;
 import com.codecool.gameservice.model.GameResponse;
 import com.codecool.gameservice.model.Question;
 import com.codecool.gameservice.model.SupriseEntity;
-import com.codecool.gameservice.service.CatServiceCaller;
-import com.codecool.gameservice.service.FunnyImgServiceCaller;
-import com.codecool.gameservice.service.GameService;
-import com.codecool.gameservice.service.QuestionServiceCaller;
+import com.codecool.gameservice.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +38,9 @@ public class GameController {
     @Autowired
     private FunnyImgServiceCaller funnyImgServiceCaller;
 
+    @Autowired
+    private PunishmentServiceCaller punishmentServiceCaller;
+
     @GetMapping
     @CrossOrigin(origins = "http://localhost:8080")
     public GameEntity startGame() {
@@ -52,7 +52,7 @@ public class GameController {
     @PostMapping
     @CrossOrigin(origins = "http://localhost:8080")
     public GameResponse sendGameResult() {
-        boolean correctness = true; //need validation based on session
+        boolean correctness = false; //need validation based on session
 
         List<SupriseEntity> suprises = new ArrayList<>();
         if (correctness) {
@@ -62,6 +62,7 @@ public class GameController {
         }
         else {
             //get a punishment
+            suprises.add(punishmentServiceCaller.getPunishment());
         }
 
         return gameService.getGameResponse(correctness, suprises);
