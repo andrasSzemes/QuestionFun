@@ -64,7 +64,20 @@ function addButtonInteractions() {
 
     highlightChosen();
     document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
-    showContent(document.body.dataset.status);
+    sendAjax("/game",
+        "POST",
+        '{"selectedAnswer": "'+event.target.textContent+'"}',
+        () => { //service works
+            let json = JSON.parse(event.target.response);
+            if (json.correctAnswer) {
+                showContent(document.body.dataset.status);
+            }
+            else {
+            }
+        },
+        () => { //service does not work
+
+        });
 }
 
 function handleAnswerChoosing() {
