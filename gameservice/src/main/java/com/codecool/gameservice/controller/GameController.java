@@ -30,6 +30,7 @@ public class GameController {
     private QuestionServiceCaller questionServiceCaller;
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:8080")
     public GameEntity startGame() {
         Question question = questionServiceCaller.getQuestion();
         return gameService.getGameEntity(question);
