@@ -3,6 +3,8 @@ package com.codecool.gameservice.controller;
 import com.codecool.gameservice.model.GameEntity;
 import com.codecool.gameservice.model.GameResponse;
 import com.codecool.gameservice.model.Question;
+import com.codecool.gameservice.service.GameService;
+import com.codecool.gameservice.service.QuestionServiceCaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,29 +23,15 @@ import java.util.Random;
 @Slf4j
 public class GameController {
 
-    private String questionServiceURL = "http://localhost:60010/question/random";
+    @Autowired
+    private GameService gameService;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private QuestionServiceCaller questionServiceCaller;
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:8080")
     public GameEntity startGame() {
-        Question question = restTemplate.getForObject(questionServiceURL, Question.class);
-
-        GameEntity gameEntity = GameEntity.builder()
-                .question(question.getQuestion())
-                .answers(getSuffledAnswers(question))
-                .build();
-
-        return gameEntity;
-    }
-
-    private List<String> getSuffledAnswers(Question question) {
-        List<String> shuffledAnswers = question.getIncorrectAnswers();
-        shuffledAnswers.add(question.getCorrectAnswer());
-        Collections.shuffle(shuffledAnswers, new Random());
-
-        return shuffledAnswers;
+        Question question = questionServiceCaller.getQuestion();
+        return gameService.getGameEntity(question);
     }
 }

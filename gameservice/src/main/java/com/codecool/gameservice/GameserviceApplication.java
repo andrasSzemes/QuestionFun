@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@EnableEurekaClient
+//@EnableEurekaClient
 public class GameserviceApplication {
 
     public static void main(String[] args) {
@@ -31,7 +31,6 @@ public class GameserviceApplication {
     }
 
     @Bean
-    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
