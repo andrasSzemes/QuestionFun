@@ -32,7 +32,6 @@ public class CatService {
             headers.add("x-api-key", "2d040837-5abd-4ea3-903b-ea6079bff644");
             HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
             ResponseEntity<CatReward> reward = restTemplate.exchange(url, GET, entity, CatReward.class);
-            System.out.println(reward.getBody().toString());
             return reward.getBody();
         } catch (Exception e) {
             return null;

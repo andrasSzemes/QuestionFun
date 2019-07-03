@@ -15,8 +15,9 @@ public class CatServiceController {
 
     @GetMapping("/random")
     public String randomCat() {
-        if (catService.getRandomCat().getUrl() != null) {
-            return catService.getRandomCat().getUrl();
+        String newUrl = catService.getRandomCat().getUrl();
+        if (newUrl != null) {
+            return newUrl;
         } else {
             return "Sorry, we're out of cute cats today.";
         }
