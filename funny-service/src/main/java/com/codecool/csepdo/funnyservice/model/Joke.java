@@ -13,4 +13,8 @@ public class Joke {
     private String type;
     private String joke;
     private String id;
+
+    public Joke(String joke) {
+        this.joke = joke;
+    }
 }
