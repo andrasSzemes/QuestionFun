@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.ResourceAccessException;
 
 @RestController
 @RequestMapping("/questions")
@@ -19,6 +20,10 @@ public class QuestionController {
 
     @GetMapping("/random")
     public Question getQuestion() {
-        return questionMapper.map(openTriviaApiCaller.getQuestion());
+        try {
+            return questionMapper.map(openTriviaApiCaller.getQuestion());
+        } catch (ResourceAccessException e) {
+            return null;
+        }
     }
 }
