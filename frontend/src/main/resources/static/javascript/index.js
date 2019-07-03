@@ -36,24 +36,35 @@ function highlightChosen() {
 /**
  * Responsible for showing the game interface or the reward interface.
  */
-function showContent(status) {
-    let gameDisplay = "initial";
-    let rewardDisplay = "none";
-    if (status == "reward") {
-        gameDisplay = "none";
-        rewardDisplay = "initial";
-    }
-    sleep(1500).then(() => {
-        let gameElements = document.querySelectorAll('[data-type="game"]');
-        for (let i=0; i<gameElements.length; i++) {
-            gameElements[i].style.display=gameDisplay;
-        }
+function refreshContent(status) {
+    let gameDisplay = document.querySelector('#game-display');
+    let rewardDisplay = document.querySelector('#reward-display');
 
-        let rewardElements = document.querySelectorAll('[data-type="reward"]');
-        for (let i=0; i<rewardElements.length; i++) {
-            rewardElements[i].style.display=rewardDisplay;
-        }
-    })
+    if (status === "reward") {
+        hideDisplay(gameDisplay);
+        showDisplay(rewardDisplay);
+    } else {
+        hideDisplay(rewardDisplay);
+        showDisplay(gameDisplay);
+    }
+}
+
+function showDisplay(display) {
+    if (display.classList.contains("fade-out")) {
+        display.classList.replace("fade-out", "fade-in")
+    } else {
+        display.classList.add("fade-in");
+    }
+    sleep(1000).then(() => display.style.display = "initial");
+}
+
+function hideDisplay(display) {
+    if (display.classList.contains("fade-in")) {
+        display.classList.replace("fade-in", "fade-out")
+    } else {
+        display.classList.add("fade-out");
+    }
+    sleep(1000).then(() => display.style.display = "none");
 }
 
 function addButtonInteractions() {
@@ -70,7 +81,7 @@ function addButtonInteractions() {
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
-                showContent(document.body.dataset.status);
+                refreshContent(document.body.dataset.status);
             }
             else {
             }

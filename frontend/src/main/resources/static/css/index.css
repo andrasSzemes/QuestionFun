@@ -54,7 +54,6 @@ body {
     position: fixed;
     top: 50vh;
     transform: translate(-50%, -50%);
-    display: none;
     cursor: pointer;
     transition-duration: 0.3s;
 }
@@ -70,4 +69,22 @@ body {
 
 #choose-reward {
     left: 71vw;
+}
+
+.fade-out {
+    animation: fadeout 1s;
+}
+
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.fade-in {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
