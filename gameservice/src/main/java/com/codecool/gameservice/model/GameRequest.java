@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GameRequest {
 
+    private String question;
     private String selectedAnswer;
 }
