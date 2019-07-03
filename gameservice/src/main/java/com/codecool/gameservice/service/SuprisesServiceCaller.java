@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class SuprisesServiceCaller {
 
-    private String suprisesServiceURL = "http://localhost:60050/suprises/random/?correctAnswer=";
+    private String suprisesServiceURL = "http://localhost:60020/surprises/random/?correctAnswer=";
 
     @Autowired
     private RestTemplate restTemplate;
