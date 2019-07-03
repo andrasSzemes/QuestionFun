@@ -1,4 +1,5 @@
 import {sendAjax, sleep} from "/javascript/utility.js";
+import {showDisplay, hideDisplay, highlightChosen} from "/javascript/visuals.js";
 
 function loadQuestionWithAnswers() {
     let questionElement = document.querySelector(".question");
@@ -6,9 +7,9 @@ function loadQuestionWithAnswers() {
 
     sendAjax("http://localhost:60050/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
-        questionElement.textContent = json.question;
+        questionElement.innerHTML = json.question;
         for (let i=0; i<4; i++) {
-            answerElements[i].textContent = json.answers[i];
+            answerElements[i].innerHTML = json.answers[i];
         }
     },
     () => {
@@ -17,20 +18,6 @@ function loadQuestionWithAnswers() {
             answerElements[i].textContent = "This should be an answer";
         }
     });
-}
-
-/**
- * Highlight the chosen answer and removes the hover effect from other options.
- */
-function highlightChosen() {
-    let answerElements = document.querySelectorAll("div[class^=answer]");
-
-    for (let i=0; i<4; i++) {
-        answerElements[i].classList.add("not-clicked");
-    }
-    event.target.classList.remove("not-clicked");
-    event.target.classList.add("clicked");
-
 }
 
 /**
@@ -49,26 +36,9 @@ function refreshContent(status) {
     }
 }
 
-function showDisplay(display) {
-    if (display.classList.contains("fade-out")) {
-        display.classList.replace("fade-out", "fade-in")
-    } else {
-        display.classList.add("fade-in");
-    }
-    sleep(1000).then(() => display.style.display = "initial");
-}
-
-function hideDisplay(display) {
-    if (display.classList.contains("fade-in")) {
-        display.classList.replace("fade-in", "fade-out")
-    } else {
-        display.classList.add("fade-out");
-    }
-    sleep(1000).then(() => display.style.display = "none");
-}
-
 function addButtonInteractions() {
     let answerElements = document.querySelectorAll("div[class^=answer]");
+    let questionElement = document.querySelector(".question");
     for (let i=0; i<4; i++) {
         answerElements[i].removeEventListener("click", addButtonInteractions);
     }
@@ -77,7 +47,7 @@ function addButtonInteractions() {
     document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
     sendAjax("http://localhost:60050/game",
         "POST",
-        '{"selectedAnswer": "'+event.target.textContent+'"}',
+        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.textContent}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {

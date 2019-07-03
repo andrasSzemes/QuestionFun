@@ -26,20 +26,24 @@ public class SurpriseServiceCaller {
 
 
     public Surprise getSurprise(SurpriseType surpriseType) {
-        try {
-            switch(surpriseType) {
-                case KITTEN:
-                    return restTemplate.getForEntity(kittenServiceUrl, Surprise.class).getBody();
-                case FUNNYIMGS:
-                    return restTemplate.getForEntity(funnyimgsServiceUrl, Surprise.class).getBody();
-                case PUNISHMENT:
-                    return restTemplate.getForEntity(punishmentServiceUrl, Surprise.class).getBody();
-                default:
-                    return null;
-            }
-        } catch (ResourceAccessException e) {
-            log.warn(e.getMessage());
-            return null;
+        Surprise surprise = null;
+        switch(surpriseType) {
+            case KITTEN:
+                try { surprise = restTemplate.getForEntity(kittenServiceUrl, Surprise.class).getBody(); }
+                catch (ResourceAccessException e) {
+                    if (surprise == null) { surprise = SurpriseType.KITTEN.getDefault(); }
+                }
+            case FUNNYIMGS:
+                try { surprise = restTemplate.getForEntity(funnyimgsServiceUrl, Surprise.class).getBody(); }
+                catch (ResourceAccessException e) {
+                    if (surprise == null) { surprise = SurpriseType.FUNNYIMGS.getDefault(); }
+                }
+            case PUNISHMENT:
+                try {surprise = restTemplate.getForEntity(punishmentServiceUrl, Surprise.class).getBody(); }
+                catch (ResourceAccessException e) {
+                    if (surprise == null) { surprise = SurpriseType.PUNISHMENT.getDefault(); }
+                }
         }
+        return surprise;
     }
 }
