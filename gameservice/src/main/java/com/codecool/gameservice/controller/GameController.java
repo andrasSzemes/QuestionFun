@@ -33,13 +33,7 @@ public class GameController {
     private QuestionServiceCaller questionServiceCaller;
 
     @Autowired
-    private CatServiceCaller catServiceCaller;
-
-    @Autowired
-    private FunnyImgServiceCaller funnyImgServiceCaller;
-
-    @Autowired
-    private PunishmentServiceCaller punishmentServiceCaller;
+    private SuprisesServiceCaller suprisesServiceCaller;
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:8080")
@@ -54,16 +48,7 @@ public class GameController {
     public GameResponse sendGameResult() {
         boolean correctness = false; //need validation based on session
 
-        List<SupriseEntity> suprises = new ArrayList<>();
-        if (correctness) {
-            //get two types of reward
-            suprises.add(catServiceCaller.getCat());
-            suprises.add(funnyImgServiceCaller.getImg());
-        }
-        else {
-            //get a punishment
-            suprises.add(punishmentServiceCaller.getPunishment());
-        }
+        List<SupriseEntity> suprises = suprisesServiceCaller.getSuprises(correctness);
 
         return gameService.getGameResponse(correctness, suprises);
     }
