@@ -78,7 +78,7 @@ function addButtonInteractions() {
     document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
     sendAjax("http://localhost:60050/game",
         "POST",
-        '{"selectedAnswer": "'+event.target.textContent+'", "question": "'+questionElement.textContent+'"}',
+        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.textContent}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
