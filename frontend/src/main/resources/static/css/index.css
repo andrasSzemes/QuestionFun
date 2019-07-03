@@ -74,6 +74,7 @@ body {
 
 .fade-out {
     animation: fadeout 1s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadeout {
@@ -83,6 +84,7 @@ body {
 
 .fade-in {
     animation: fadein 1s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadein {

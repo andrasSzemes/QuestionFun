@@ -41,6 +41,7 @@ function showAdvertisement(punishment) {
     let video = document.querySelector("video");
     let source = document.createElement('source');
 
+    showDisplay(video);
     source.setAttribute('src', punishment.src);
     video.appendChild(source);
     video.play();
@@ -69,7 +70,18 @@ function addButtonInteractions() {
             else {
                 let punishment = json.surprises[0];
                 showAdvertisement(punishment);
+                loadQuestionWithAnswers();
 
+                sleep(2000).then(() => {
+                    let gameDisplay = document.querySelector('#game-display');
+                    showDisplay(gameDisplay);
+
+                    let source = document.querySelector("source");
+                    hideDisplay(source.parentNode);
+                    source.parentNode.removeChild(source);
+
+                    addButtonInteractions();
+                })
             }
         },
         () => { //service does not work
