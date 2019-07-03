@@ -50,6 +50,23 @@ function showAdvertisement(punishment) {
     hideDisplay(gameDisplay);
 }
 
+function returnToGame() {
+    sleep(1000).then(() => {
+        loadQuestionWithAnswers();
+    });
+
+    sleep(2000).then(() => {
+        let gameDisplay = document.querySelector('#game-display');
+        showDisplay(gameDisplay);
+
+        let source = document.querySelector("source");
+        hideDisplay(source.parentNode);
+        source.parentNode.removeChild(source);
+
+        handleAnswerChoosing();
+    })
+}
+
 function addButtonInteractions() {
     let answerElements = document.querySelectorAll("div[class^=answer]");
     let questionElement = document.querySelector(".question");
@@ -70,18 +87,7 @@ function addButtonInteractions() {
             else {
                 let punishment = json.surprises[0];
                 showAdvertisement(punishment);
-                sleep(1000).then(() => {loadQuestionWithAnswers();});
-
-                sleep(2000).then(() => {
-                    let gameDisplay = document.querySelector('#game-display');
-                    showDisplay(gameDisplay);
-
-                    let source = document.querySelector("source");
-                    hideDisplay(source.parentNode);
-                    source.parentNode.removeChild(source);
-
-                    handleAnswerChoosing();
-                })
+                returnToGame();
             }
         },
         () => { //service does not work
