@@ -22,8 +22,8 @@ public enum SurpriseType {
                 break;
             case PUNISHMENT:
                 surprise = Surprise.builder()
-                        .src("https://memestatic.fjcdn.com/pictures/Bad_027fcf_6561414.jpg")
-                        .type("jpg")
+                        .src("https://www.youtube.com/watch?v=TJmhpWbZSbk")
+                        .type("video")
                         .surpriseType("punishment")
                         .build();
         }
