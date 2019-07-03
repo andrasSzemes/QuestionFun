@@ -55,6 +55,16 @@ function addButtonInteractions() {
                 refreshContent(document.body.dataset.status);
             }
             else {
+                let punishment = json.surprises[0];
+                let video = document.querySelector("video");
+                let source = document.createElement('source');
+
+                source.setAttribute('src', punishment.src);
+                video.appendChild(source);
+                video.play();
+
+                let gameDisplay = document.querySelector('#game-display');
+                hideDisplay(gameDisplay);
             }
         },
         () => { //service does not work

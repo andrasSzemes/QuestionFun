@@ -22,7 +22,7 @@ public enum SurpriseType {
                 break;
             case PUNISHMENT:
                 surprise = Surprise.builder()
-                        .src("https://www.youtube.com/watch?v=TJmhpWbZSbk")
+                        .src("/video/WelcomeBackPumpkinSpiceLatte.mp4")
                         .type("video")
                         .surpriseType("punishment")
                         .build();
