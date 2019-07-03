@@ -13,8 +13,8 @@ public class FunnyServiceController {
     @Autowired
     private FunnyService funnyService;
 
-    @GetMapping("/new-joke")
-    public String getNewJoke() {
+    @GetMapping("/new-image")
+    public String getNewImage() {
         String newImage = funnyService.newImage();
         if (newImage != null) {
             return newImage;
