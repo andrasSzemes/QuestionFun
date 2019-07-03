@@ -1,4 +1,5 @@
 import {sendAjax, sleep} from "/javascript/utility.js";
+import {showDisplay, hideDisplay, highlightChosen} from "/javascript/visuals.js";
 
 function loadQuestionWithAnswers() {
     let questionElement = document.querySelector(".question");
@@ -20,20 +21,6 @@ function loadQuestionWithAnswers() {
 }
 
 /**
- * Highlight the chosen answer and removes the hover effect from other options.
- */
-function highlightChosen() {
-    let answerElements = document.querySelectorAll("div[class^=answer]");
-
-    for (let i=0; i<4; i++) {
-        answerElements[i].classList.add("not-clicked");
-    }
-    event.target.classList.remove("not-clicked");
-    event.target.classList.add("clicked");
-
-}
-
-/**
  * Responsible for showing the game interface or the reward interface.
  */
 function refreshContent(status) {
@@ -47,24 +34,6 @@ function refreshContent(status) {
         hideDisplay(rewardDisplay);
         showDisplay(gameDisplay);
     }
-}
-
-function showDisplay(display) {
-    if (display.classList.contains("fade-out")) {
-        display.classList.replace("fade-out", "fade-in")
-    } else {
-        display.classList.add("fade-in");
-    }
-    sleep(1000).then(() => display.style.display = "initial");
-}
-
-function hideDisplay(display) {
-    if (display.classList.contains("fade-in")) {
-        display.classList.replace("fade-in", "fade-out")
-    } else {
-        display.classList.add("fade-out");
-    }
-    sleep(1000).then(() => display.style.display = "none");
 }
 
 function addButtonInteractions() {
