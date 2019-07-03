@@ -24,4 +24,5 @@ public class SurprisesServiceCaller {
 
         return suprises;
     }
+
 }
