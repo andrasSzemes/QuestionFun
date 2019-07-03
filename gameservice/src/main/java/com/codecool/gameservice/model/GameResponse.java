@@ -14,5 +14,5 @@ import java.util.List;
 public class GameResponse {
 
     private boolean correctAnswer;
-    private List<SupriseEntity> suprises;
+    private List<SurpriseEntity> surprises;
 }

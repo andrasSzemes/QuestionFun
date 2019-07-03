@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SuprisesResponse {
+public class SurprisesResponse {
 
-    private List<SupriseEntity> suprises;
+    private List<SurpriseEntity> surprises;
 }
