@@ -37,6 +37,18 @@ function refreshContent(status) {
     }
 }
 
+function showAdvertisement(punishment) {
+    let video = document.querySelector("video");
+    let source = document.createElement('source');
+
+    source.setAttribute('src', punishment.src);
+    video.appendChild(source);
+    video.play();
+
+    let gameDisplay = document.querySelector('#game-display');
+    hideDisplay(gameDisplay);
+}
+
 function addButtonInteractions() {
     let answerElements = document.querySelectorAll("div[class^=answer]");
     let questionElement = document.querySelector(".question");
@@ -56,15 +68,8 @@ function addButtonInteractions() {
             }
             else {
                 let punishment = json.surprises[0];
-                let video = document.querySelector("video");
-                let source = document.createElement('source');
+                showAdvertisement(punishment);
 
-                source.setAttribute('src', punishment.src);
-                video.appendChild(source);
-                video.play();
-
-                let gameDisplay = document.querySelector('#game-display');
-                hideDisplay(gameDisplay);
             }
         },
         () => { //service does not work
