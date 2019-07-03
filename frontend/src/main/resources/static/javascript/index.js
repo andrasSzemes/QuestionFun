@@ -8,6 +8,7 @@ function loadQuestionWithAnswers() {
     sendAjax("http://localhost:60050/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
         questionElement.innerHTML = json.question;
+        questionElement.dataset.text=json.question;
         for (let i=0; i<4; i++) {
             answerElements[i].innerHTML = json.answers[i];
         }
@@ -47,7 +48,7 @@ function addButtonInteractions() {
     document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
     sendAjax("http://localhost:60050/game",
         "POST",
-        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.textContent}"}`,
+        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.dataset.text}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
