@@ -1,4 +1,4 @@
-package com.codecool.cspeod.funnyservice;
+package com.codecool.csepdo.funnyservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
