@@ -41,6 +41,7 @@ function showAdvertisement(punishment) {
     let video = document.querySelector("video");
     let source = document.createElement('source');
 
+    showDisplay(video);
     source.setAttribute('src', punishment.src);
     video.appendChild(source);
     video.play();
@@ -69,7 +70,18 @@ function addButtonInteractions() {
             else {
                 let punishment = json.surprises[0];
                 showAdvertisement(punishment);
+                sleep(1000).then(() => {loadQuestionWithAnswers();});
 
+                sleep(2000).then(() => {
+                    let gameDisplay = document.querySelector('#game-display');
+                    showDisplay(gameDisplay);
+
+                    let source = document.querySelector("source");
+                    hideDisplay(source.parentNode);
+                    source.parentNode.removeChild(source);
+
+                    handleAnswerChoosing();
+                })
             }
         },
         () => { //service does not work
@@ -82,6 +94,8 @@ function handleAnswerChoosing() {
 
     for (let i=0; i<4; i++) {
         answerElements[i].addEventListener("click", addButtonInteractions);
+        answerElements[i].classList.remove("clicked");
+        answerElements[i].classList.remove("not-clicked");
     }
 }
 
