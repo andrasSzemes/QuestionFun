@@ -6,9 +6,9 @@ function loadQuestionWithAnswers() {
 
     sendAjax("http://localhost:60050/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
-        questionElement.textContent = json.question;
+        questionElement.innerHTML = json.question;
         for (let i=0; i<4; i++) {
-            answerElements[i].textContent = json.answers[i];
+            answerElements[i].innerHTML = json.answers[i];
         }
     },
     () => {
