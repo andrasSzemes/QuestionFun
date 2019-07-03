@@ -13,7 +13,7 @@ import java.util.Random;
 @Service
 public class FunnyService {
 
-    @Value("${filepath.url}")
+    @Value("${filepath}")
     private String filepath;
 
     private List<String> urls = new ArrayList<>();
