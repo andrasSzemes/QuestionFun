@@ -70,7 +70,7 @@ function addButtonInteractions() {
             else {
                 let punishment = json.surprises[0];
                 showAdvertisement(punishment);
-                loadQuestionWithAnswers();
+                sleep(1000).then(() => {loadQuestionWithAnswers();});
 
                 sleep(2000).then(() => {
                     let gameDisplay = document.querySelector('#game-display');
@@ -80,7 +80,7 @@ function addButtonInteractions() {
                     hideDisplay(source.parentNode);
                     source.parentNode.removeChild(source);
 
-                    addButtonInteractions();
+                    handleAnswerChoosing();
                 })
             }
         },
@@ -94,6 +94,8 @@ function handleAnswerChoosing() {
 
     for (let i=0; i<4; i++) {
         answerElements[i].addEventListener("click", addButtonInteractions);
+        answerElements[i].classList.remove("clicked");
+        answerElements[i].classList.remove("not-clicked");
     }
 }
 
