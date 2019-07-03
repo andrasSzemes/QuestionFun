@@ -3,7 +3,7 @@ package com.codecool.gameservice.service;
 import com.codecool.gameservice.model.GameEntity;
 import com.codecool.gameservice.model.GameResponse;
 import com.codecool.gameservice.model.Question;
-import com.codecool.gameservice.model.SupriseEntity;
+import com.codecool.gameservice.model.SurpriseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,10 +22,10 @@ public class GameService {
         return gameEntity;
     }
 
-    public GameResponse getGameResponse(boolean correctness, List<SupriseEntity> suprises) {
+    public GameResponse getGameResponse(boolean correctness, List<SurpriseEntity> suprises) {
         GameResponse gameResponse = GameResponse.builder()
                 .correctAnswer(correctness)
-                .suprises(suprises)
+                .surprises(suprises)
                 .build();
 
         return gameResponse;
