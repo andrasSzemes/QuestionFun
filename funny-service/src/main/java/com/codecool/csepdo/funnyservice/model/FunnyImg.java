@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Joke {
+public class FunnyImg {
 
-    private String category;
-    private String type;
-    private String joke;
-    private String id;
+    private String type = "imgReward";
+    private String src;
+    private String surpriseType = "funnyImg";
 
-    public Joke(String joke) {
-        this.joke = joke;
+    public FunnyImg(String url) {
+        this.src = url;
     }
 }

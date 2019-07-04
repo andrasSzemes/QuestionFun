@@ -1,5 +1,6 @@
 package com.codecool.csepdo.funnyservice.controller;
 
+import com.codecool.csepdo.funnyservice.model.FunnyImg;
 import com.codecool.csepdo.funnyservice.service.FunnyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,7 @@ public class FunnyServiceController {
     private FunnyService funnyService;
 
     @GetMapping("/new-image")
-    public String getNewImage() {
-        String newImage = funnyService.newImage();
-        if (newImage != null) {
-            return newImage;
-        } else {
-            return "Sorry, no funny images for today.";
-        }
+    public FunnyImg getNewImage() {
+        return funnyService.newImage();
     }
 }
