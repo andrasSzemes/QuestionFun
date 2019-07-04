@@ -31,17 +31,17 @@ public class SurpriseServiceCaller {
             case KITTEN:
                 try { surprise = restTemplate.getForEntity(kittenServiceUrl, Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
-                    if (surprise == null) { surprise = SurpriseType.KITTEN.getDefault(); }
+                    surprise = SurpriseType.KITTEN.getDefault();
                 }
             case FUNNYIMGS:
                 try { surprise = restTemplate.getForEntity(funnyimgsServiceUrl, Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
-                    if (surprise == null) { surprise = SurpriseType.FUNNYIMGS.getDefault(); }
+                    surprise = SurpriseType.FUNNYIMGS.getDefault();
                 }
             case PUNISHMENT:
                 try {surprise = restTemplate.getForEntity(punishmentServiceUrl+"/new-video", Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
-                    if (surprise == null) { surprise = SurpriseType.PUNISHMENT.getDefault(); }
+                    surprise = SurpriseType.PUNISHMENT.getDefault();
                 }
         }
         return surprise;
