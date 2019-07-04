@@ -75,14 +75,13 @@ function addButtonInteractions() {
     }
 
     highlightChosen();
-    document.body.dataset.status = (document.body.dataset.status === "game") ? "reward" : "game";
     sendAjax("http://localhost:60050/game",
         "POST",
         `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.dataset.text}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
-                refreshContent(document.body.dataset.status);
+                refreshContent("reward");
                 waitForSelectReward(json.surprises).then(resultSrc => showReward(resultSrc));
             }
             else {
@@ -134,12 +133,11 @@ function showReward(rewardSrc) {
 function loadNextQuestion(selectedImg, otherImg, origSrc, eventListener) {
     let gameDisplay = document.querySelector('#game-display');
     let rewardDisplay = document.querySelector('#reward-display');
-    hideDisplay(rewardDisplay);
     initGame();
+    refreshContent("game");
     sleep(1000).then(() => {
         resetRewardDisplay(selectedImg, otherImg, origSrc, eventListener)
     });
-    sleep(700).then(() => showDisplay(gameDisplay));
 }
 
 function resetRewardDisplay(selectedImg, otherImg, origSrc, eventListener){
