@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SupriseEntity {
+public class SurpriseEntity {
 
     private String type;
     private String src;
-    private String supriseType;
+    private String surpriseType;
 }

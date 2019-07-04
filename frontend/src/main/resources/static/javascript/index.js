@@ -8,6 +8,7 @@ function loadQuestionWithAnswers() {
     sendAjax("http://localhost:60050/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
         questionElement.innerHTML = json.question;
+        questionElement.dataset.text=json.question;
         for (let i=0; i<4; i++) {
             answerElements[i].innerHTML = json.answers[i];
         }
@@ -36,6 +37,36 @@ function refreshContent(status) {
     }
 }
 
+function showAdvertisement(punishment) {
+    let video = document.querySelector("video");
+    let source = document.createElement('source');
+
+    showDisplay(video);
+    source.setAttribute('src', punishment.src);
+    video.appendChild(source);
+    video.play();
+
+    let gameDisplay = document.querySelector('#game-display');
+    hideDisplay(gameDisplay);
+}
+
+function returnToGame() {
+    sleep(1000).then(() => {
+        loadQuestionWithAnswers();
+    });
+
+    sleep(2000).then(() => {
+        let gameDisplay = document.querySelector('#game-display');
+        showDisplay(gameDisplay);
+
+        let source = document.querySelector("source");
+        hideDisplay(source.parentNode);
+        source.parentNode.removeChild(source);
+
+        handleAnswerChoosing();
+    })
+}
+
 function addButtonInteractions() {
     let answerElements = document.querySelectorAll("div[class^=answer]");
     let questionElement = document.querySelector(".question");
@@ -60,7 +91,7 @@ function addButtonInteractions() {
     ]).then(resultSrc => showReward(resultSrc));
     /*sendAjax("http://localhost:60050/game",
         "POST",
-        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.textContent}"}`,
+        `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.dataset.text}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
@@ -68,6 +99,9 @@ function addButtonInteractions() {
                 waitForChoose(json.surprises)
             }
             else {
+                let punishment = json.surprises[0];
+                showAdvertisement(punishment);
+                returnToGame();
             }
         },
         () => { //service does not work
@@ -80,6 +114,8 @@ function handleAnswerChoosing() {
 
     for (let i=0; i<4; i++) {
         answerElements[i].addEventListener("click", addButtonInteractions);
+        answerElements[i].classList.remove("clicked");
+        answerElements[i].classList.remove("not-clicked");
     }
 }
 
