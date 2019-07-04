@@ -8,7 +8,7 @@ export function sendAjax(endpoint, method, params, onSuccess, onFail) {
         console.log("Request failed for " + endpoint + " error: " + err);
     });
     req.open(method, endpoint);
-    req.setRequestHeader("Acces-Control-Allow-Origin", "http://localhost:8080");
+    req.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:8080");
     if (method === "POST" || method === "PUT") {
         req.setRequestHeader("Content-type", "application/json");
     }
