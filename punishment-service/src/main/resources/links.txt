@@ -1,6 +1,7 @@
-https://www.youtube.com/embed/iKbagmnQbVs
-https://www.youtube.com/embed/dkHJKakHMpo
-https://www.youtube.com/embed/InhbSdcNBZw
-https://www.youtube.com/embed/ZN5PoW7_kdA
-https://www.youtube.com/embed/Nr1fDOzLkAo
-https://www.youtube.com/embed/KgrvXabQbvQ
+punishment-service/src/main/resources/static/video/Annoying Orange - Passion of the Fruit.mp4
+punishment-service/src/main/resources/static/video/Annoying Orange - Wasssabi.mp4
+punishment-service/src/main/resources/static/video/Download the Wish App to get access to the Lowest Prices on Earth - $49 Drone, $1 Makeup Brushes ....mp4
+punishment-service/src/main/resources/static/video/Download the Wish App to get access to the Lowest Prices on Earth like these $1 Makeup Brushes.mp4
+punishment-service/src/main/resources/static/video/Download the Wish App to get access to the Lowest Prices on Earth like this $10 Smart Watch.mp4
+punishment-service/src/main/resources/static/video/Kedvezmények hete Dolu, Lego.mp4
+punishment-service/src/main/resources/static/video/The Most Annoying Commercial Jingle.mp4
