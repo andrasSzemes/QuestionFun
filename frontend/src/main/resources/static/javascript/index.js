@@ -5,7 +5,7 @@ function loadQuestionWithAnswers() {
     let questionElement = document.querySelector(".question");
     let answerElements = document.querySelectorAll("div[class^=answer]");
 
-    sendAjax("http://localhost:60050/game", "GET", "", () => {
+    sendAjax("http://localhost:8762/game", "GET", "", () => {
         let json = JSON.parse(event.target.response);
         questionElement.innerHTML = json.question;
         questionElement.dataset.text=json.question;
@@ -75,7 +75,7 @@ function addButtonInteractions() {
     }
 
     highlightChosen();
-    sendAjax("http://localhost:60050/game",
+    sendAjax("http://localhost:8762/game",
         "POST",
         `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.dataset.text}"}`,
         () => { //service works
