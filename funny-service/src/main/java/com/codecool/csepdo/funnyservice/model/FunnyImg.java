@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class FunnyImg {
 
     private String type = "imgReward";
-    private String url;
+    private String src;
     private String surpriseType = "funnyImg";
 
     public FunnyImg(String url) {
-        this.url = url;
+        this.src = url;
     }
 }
