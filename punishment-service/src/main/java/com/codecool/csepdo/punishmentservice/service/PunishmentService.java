@@ -1,5 +1,6 @@
 package com.codecool.csepdo.punishmentservice.service;
 
+import com.codecool.csepdo.punishmentservice.model.Punishment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ public class PunishmentService {
 
     private Random random = new Random();
 
-    public String newVideo() {
+    public Punishment newVideo() {
         readFile();
-        return urls.get(random.nextInt(urls.size()));
+        return new Punishment(urls.get(random.nextInt(urls.size())));
     }
 
     public void readFile() {
