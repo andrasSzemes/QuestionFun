@@ -1,12 +1,14 @@
 package com.codecool.csepdo.catservice.controller;
 
+import com.codecool.csepdo.catservice.model.CatReward;
 import com.codecool.csepdo.catservice.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/cat")
 public class CatServiceController {
 
@@ -14,13 +16,7 @@ public class CatServiceController {
     private CatService catService;
 
     @GetMapping("/random")
-    public String randomCat() {
-        String newUrl = catService.getRandomCat().getUrl();
-        if (newUrl != null) {
-            return newUrl;
-        } else {
-            return "Sorry, we're out of cute cats today.";
-        }
+    public CatReward randomCat() {
+        return catService.getRandomCat();
     }
-
 }

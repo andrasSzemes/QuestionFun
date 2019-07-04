@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CatReward {
-    private int height;
-    private String id;
-    private String url;
-    private int width;
+    private String type = "catReward";
+    private String src;
+    private String surpriseType = "cat";
+
+    public CatReward(String src) {
+        this.src = src;
+    }
 }
