@@ -1,5 +1,6 @@
 package com.codecool.csepdo.funnyservice.service;
 
+import com.codecool.csepdo.funnyservice.model.FunnyImg;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ public class FunnyService {
 
     private Random random = new Random();
 
-    public String newImage() {
+    public FunnyImg newImage() {
         readFile();
-        return urls.get(random.nextInt(urls.size()));
+        return new FunnyImg(urls.get(random.nextInt(urls.size())));
     }
 
     public void readFile() {
