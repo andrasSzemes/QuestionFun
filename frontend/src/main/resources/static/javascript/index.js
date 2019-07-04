@@ -112,7 +112,7 @@ function handleChoose(event) {
 
 function addRewardEventHandlers() {
     document.querySelector("#choose-cat").addEventListener("click", handleChoose);
-    document.querySelector("#choose-reward").addEventListener("click", handleChoose);
+    document.querySelector("#choose-funnyImg").addEventListener("click", handleChoose);
 }
 
 function showReward(rewardSrc) {
