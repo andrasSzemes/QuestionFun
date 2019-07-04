@@ -39,7 +39,7 @@ public class SurpriseServiceCaller {
                     if (surprise == null) { surprise = SurpriseType.FUNNYIMGS.getDefault(); }
                 }
             case PUNISHMENT:
-                try {surprise = restTemplate.getForEntity(punishmentServiceUrl, Surprise.class).getBody(); }
+                try {surprise = restTemplate.getForEntity(punishmentServiceUrl+"/new-video", Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
                     if (surprise == null) { surprise = SurpriseType.PUNISHMENT.getDefault(); }
                 }
