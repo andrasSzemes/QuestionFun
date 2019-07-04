@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class QuestionServiceCaller {
 
-    private String questionServiceURL = "http://localhost:60010/questions/random";
+    private String questionServiceURL = "http://question-service/questions/random";
 
     @Autowired
     private RestTemplate restTemplate;

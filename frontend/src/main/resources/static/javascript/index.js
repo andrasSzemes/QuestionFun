@@ -75,14 +75,14 @@ function addButtonInteractions() {
     }
 
     highlightChosen();
-    document.body.dataset.status = (document.body.dataset.status == "game") ? "reward" : "game";
     sendAjax("http://localhost:60050/game",
         "POST",
         `{"selectedAnswer": "${event.target.textContent}", "question": "${questionElement.dataset.text}"}`,
         () => { //service works
             let json = JSON.parse(event.target.response);
             if (json.correctAnswer) {
-                refreshContent(document.body.dataset.status);
+                refreshContent("reward");
+                waitForSelectReward(json.surprises).then(resultSrc => showReward(resultSrc));
             }
             else {
                 let punishment = json.surprises[0];
@@ -105,5 +105,75 @@ function handleAnswerChoosing() {
     }
 }
 
-loadQuestionWithAnswers();
-handleAnswerChoosing();
+function handleChoose(event) {
+    const selectedImg = event.target;
+    selectedImg.classList.toggle("selected");
+}
+
+function addRewardEventHandlers() {
+    document.querySelector("#choose-cat").addEventListener("click", handleChoose);
+    document.querySelector("#choose-reward").addEventListener("click", handleChoose);
+}
+
+function showReward(rewardSrc) {
+    const selectedImg = document.querySelector("img.selected");
+    const origSrc = selectedImg.getAttribute("src");
+    const otherImg = Array.from(document.querySelectorAll("img")).filter(img => !img.classList.contains("selected"))[0];
+    hideDisplay(otherImg);
+    sleep(1000).then(() => {
+        selectedImg.classList.add("reveal");
+        selectedImg.setAttribute("src", rewardSrc);
+        selectedImg.setAttribute("title", "Click to continue with next question");
+        selectedImg.addEventListener("click", function listenerForLoadNextQuestion() {
+            loadNextQuestion(selectedImg, otherImg, origSrc, listenerForLoadNextQuestion);
+        })
+    });
+}
+
+function loadNextQuestion(selectedImg, otherImg, origSrc, eventListener) {
+    let gameDisplay = document.querySelector('#game-display');
+    let rewardDisplay = document.querySelector('#reward-display');
+    initGame();
+    refreshContent("game");
+    sleep(1000).then(() => {
+        resetRewardDisplay(selectedImg, otherImg, origSrc, eventListener)
+    });
+}
+
+function resetRewardDisplay(selectedImg, otherImg, origSrc, eventListener){
+    selectedImg.classList.remove("reveal", "selected");
+    selectedImg.removeAttribute("title");
+    selectedImg.setAttribute("src", origSrc);
+    selectedImg.removeEventListener("click", eventListener);
+    otherImg.style.display = "initial";
+    otherImg.classList.remove("fade-out");
+}
+
+
+function waitForSelectReward(rewards) {
+    return new Promise(resolve => {
+        let resolved = false;
+        setTimeout(() => {
+            let selectors = document.querySelectorAll("img");
+            for (const selector of selectors) {
+                if(selector.classList.contains("selected")) {
+                    const type = selector.id.split("-")[1];
+                    const src = rewards.filter(reward => reward.surpriseType === type).map(reward => reward.src)[0];
+                    resolve(src);
+                    resolved = true;
+                }
+            }
+            if(!resolved) waitForSelectReward(rewards).then(result => resolve(result));
+        }, 500);
+    })
+}
+
+function initGame() {
+    document.body.dataset.status = "game";
+    addRewardEventHandlers();
+    loadQuestionWithAnswers();
+    handleAnswerChoosing();
+}
+
+initGame();
+
