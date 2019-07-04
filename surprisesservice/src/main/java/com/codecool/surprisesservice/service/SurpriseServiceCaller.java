@@ -33,16 +33,19 @@ public class SurpriseServiceCaller {
                 catch (ResourceAccessException e) {
                     surprise = SurpriseType.KITTEN.getDefault();
                 }
+                break;
             case FUNNYIMGS:
                 try { surprise = restTemplate.getForEntity(funnyimgsServiceUrl, Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
                     surprise = SurpriseType.FUNNYIMGS.getDefault();
                 }
+                break;
             case PUNISHMENT:
                 try {surprise = restTemplate.getForEntity(punishmentServiceUrl+"/new-video", Surprise.class).getBody(); }
                 catch (ResourceAccessException e) {
                     surprise = SurpriseType.PUNISHMENT.getDefault();
                 }
+                break;
         }
         return surprise;
     }
