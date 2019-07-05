@@ -48,7 +48,7 @@ body {
 }
 
 #choose-cat, #choose-funnyImg {
-    width: 30vh;
+    height: 30vh;
     border-radius: 5vh;
     position: fixed;
     top: 50vh;
@@ -99,7 +99,7 @@ body {
 @keyframes revealanimation {
     to {
         left: 50vw;
-        width: 60vw;
+        height: 100vh;
     }
 }
 
