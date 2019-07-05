@@ -61,6 +61,7 @@ function returnToGame() {
 
         let source = document.querySelector("source");
         hideDisplay(source.parentNode);
+        source.parentNode.pause();
         source.parentNode.removeChild(source);
 
         handleAnswerChoosing();
