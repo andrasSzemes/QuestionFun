@@ -55,7 +55,7 @@ function returnToGame() {
         loadQuestionWithAnswers();
     });
 
-    sleep(2000).then(() => {
+    sleep(10000).then(() => {
         let gameDisplay = document.querySelector('#game-display');
         showDisplay(gameDisplay);
 
